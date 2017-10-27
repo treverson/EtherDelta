@@ -32,7 +32,7 @@
     <div class="banner">
         <div class="row section" style="padding: 20px 20px;">
             <div class="logo"><img src="{{ asset('images/centra logo.png') }}"/></div>
-            <div class="erc_txt">DECENTRALIZED TRADING</div>
+            <div class="erc_txt">CENTRALIZED TRADING</div>
             <div class="erc_toggle">
                 <input type="checkbox" data-toggle="toggle" data-size="mini" id="toggle_erc20" onchange='doOnERC20Toggle()'>
             </div>
@@ -52,161 +52,12 @@
     <div class="content">
         <div class="sidebar">
             <div class="c-nav">
-                <div id="netfee">NET FEE</div>
                 <div class="asset_section">
-                        <div class="asset_title">BITCOIN</div>
-                        <div id="btc_usd" class="asset_item">
-                            <div class="crypto_name">BTC/ETH</div>
-                            <div class="crypto_price" class="crypto_price"><i class="cc ETH" aria-hidden="true"></i>14.15818</div>
-                            <div class="crypto_percent">3.66%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">BTC/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>4171.21294</div>
-                            <div class="crypto_percent">5.14%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                </div>
-                <div id="asset_ether" class="asset_section">
-                        <div class="asset_title">ETHEREUM</div>
-                        <div class="asset_item">
-                            <div class="crypto_name">ETH/BTC</div>
-                            <div class="crypto_price"><i class="cc BTC" aria-hidden="true"></i>0.07014</div>
-                            <div class="crypto_percent">0.77%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">ETH/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>299.80000</div>
-                            <div class="crypto_percent" style="color:#fd2d2f;">2.79%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
-                        </div>
-                </div>
-                <div id="asset_litecoin" class="asset_section">
-                        <div class="asset_title">LITECOIN</div>
-                        <div class="asset_item">
-                            <div class="crypto_name">LTC/BTC</div>
-                            <div class="crypto_price"><i class="cc BTC" aria-hidden="true"></i>0.01280</div>
-                            <div class="crypto_percent">7.22%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">LTC/ETH</div>
-                            <div class="crypto_price"><i class="cc ETH" aria-hidden="true"></i>0.16956287</div>
-                            <div class="crypto_percent">1.42%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">LTC/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>295.75</div>
-                            <div class="crypto_percent">2.39%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                </div>
-                <div id="asset_ctr" class="asset_section">
-                        <div class="asset_title">CTR</div>
-                        <div class="asset_item">
-                            <div class="crypto_name">CTR/BTC</div>
-                            <div class="crypto_price"><i class="cc BTC" aria-hidden="true"></i>0.00219996</div>
-                            <div class="crypto_percent">0.81%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">CTR/ETH</div>
-                            <div class="crypto_price"><i class="cc ETH" aria-hidden="true"></i>0.03667154</div>
-                            <div class="crypto_percent">8.42%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">CTR/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>12.31333534</div>
-                            <div class="crypto_percent">1.56%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
-                        </div>
-                </div>
-                <div class="asset_section">
-                        <div class="asset_title">DASH</div>
-                        <div class="asset_item">
-                            <div class="crypto_name">DASH/BTC</div>
-                            <div class="crypto_price"><i class="cc BTC" aria-hidden="true"></i>0.07800118</div>
-                            <div class="crypto_percent">7.22%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">DASH/ETH</div>
-                            <div class="crypto_price"><i class="cc ETH" aria-hidden="true"></i>0.94631755</div>
-                            <div class="crypto_percent">0.36%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">DASH/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>333.3451</div>
-                            <div class="crypto_percent">2.39%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                </div>
-                <div class="asset_section">
-                        <div class="asset_title">RIPPLE</div>
-                        <div class="asset_item">
-                            <div class="crypto_name">RIPPLE/BTC</div>
-                            <div class="crypto_price"><i class="cc BTC" aria-hidden="true"></i>0.00004692</div>
-                            <div class="crypto_percent">7.22%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">RIPPLE/ETH</div>
-                            <div class="crypto_price"><i class="cc ETH" aria-hidden="true"></i>0.00082731</div>
-                            <div class="crypto_percent">0.61%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">RIPPLE/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>0.19573300</div>
-                            <div class="crypto_percent">2.39%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                </div>
-                <div class="asset_section">
-                        <div class="asset_title">MONERO</div>
-                        <div class="asset_item">
-                            <div class="crypto_name">MONERO/BTC</div>
-                            <div class="crypto_price"><i class="cc BTC" aria-hidden="true"></i>0.02272162</div>
-                            <div class="crypto_percent">7.22%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">MONERO/ETH</div>
-                            <div class="crypto_price"><i class="cc ETH" aria-hidden="true"></i>0.28637943</div>
-                            <div class="crypto_percent">6.58%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">MONERO/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>94.65298695</div>
-                            <div class="crypto_percent">2.39%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                </div>
-                <div class="asset_section">
-                        <div class="asset_title">Zcash</div>
-                        <div class="asset_item">
-                            <div class="crypto_name">Zcash/BTC</div>
-                            <div class="crypto_price"><i class="cc BTC" aria-hidden="true"></i>0.06883012</div>
-                            <div class="crypto_percent">7.22%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">Zcash/ETH</div>
-                            <div class="crypto_price"><i class="cc ETH" aria-hidden="true"></i>0.78352321</div>
-                            <div class="crypto_percent">4.83%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
-                        </div>
-                        <div class="asset_item">
-                            <div class="crypto_name">Zcash/USDT</div>
-                            <div class="crypto_price"><i class="cc USDT" aria-hidden="true"></i>290.65497112</div>
-                            <div class="crypto_percent">2.39%</div>
-                            <div class="crypto_rise"><i class="fa fa-chevron-up" aria-hidden="true" ></i></div>
+                        <div class="asset_item_header">
+                            <div style="float:left;width:25%;text-align:center;">Pair</div>
+                            <div style="float:left;width:25%;text-align:center;">Daily</div>
+                            <div style="float:left;width:25%;text-align:center;">Bid</div>
+                            <div style="float:left;width:25%;text-align:center;">Offer</div>
                         </div>
                 </div>
             </div>
@@ -394,26 +245,27 @@
             </div>
         </div>
         <div class="main_content">
+            <div class="trade_info_bar">
+                <div class="market_stat">
+                    <span class="num">0.00000000</span><span class="back_asset"></span>
+                    <span class="descr">Last trade price</span>
+                </div>
+                <div class="price_up">
+                    <span class="sign">+</span>
+                    <span class="num">9.46 %</span>
+                    <span class="descr">24 hour price</span>
+                </div>
+                <div class="day_volume">
+                    <span class="num">55991&nbsp;</span><span class="front_asset"></span>
+                    <span class="descr">24 hour volume</span>
+                </div>
+            </div>
             <div class="row middle_panel">
                 <div class="col-md-12">
                     <div class="row price_chart_panel panel">
                         <div class="price_chart_header">
                             <div class="title">PRICE CHART</div>
-                            <div class="trade_info_bar">
-                                <div class="market_stat">
-                                    <span class="num">0.00000000</span><span class="back_asset"></span>
-                                    <span class="descr">Last trade price</span>
-                                </div>
-                                <div class="price_up">
-                                    <span class="sign">+</span>
-                                    <span class="num">9.46 %</span>
-                                    <span class="descr">24 hour price</span>
-                                </div>
-                                <div class="day_volume">
-                                    <span class="num">55991&nbsp;</span><span class="front_asset"></span>
-                                    <span class="descr">24 hour volume</span>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="price_chart_content">
                             <div id = 'option_container'  >

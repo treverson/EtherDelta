@@ -439,7 +439,7 @@ input::-webkit-inner-spin-button {
 /*------------ sidebar ------------*/
 
 .sidebar {
-    width: 230px;
+    width: 320px;
     float:left;
     padding-right: 2px;
     overflow: hidden;
@@ -509,7 +509,7 @@ input::-webkit-inner-spin-button {
     width: 100%;
     float: right;
     color: hsla(206,8%,82%,.75);
-    padding: 10px 0 0 0;
+    padding: 0 0 0 0;
     display: none;
 }
 .asset_title_part {
@@ -535,7 +535,7 @@ input::-webkit-inner-spin-button {
     padding-top: 6px;
 }
 .asset_item {
-    padding: 6px 5px 20px 5px;
+    padding: 6px 15px 20px 15px;
     font-size: 11px;
     cursor: pointer;
 }
@@ -1356,7 +1356,7 @@ input::-webkit-inner-spin-button {
 .main_content {
     height: calc(100% - 66px);
     overflow: scroll;
-    padding: 77px 30px 66px 40px;
+    padding: 30px 30px 66px 40px;
 }
 .bottom_panel {
     margin-top: 23px;
@@ -1368,6 +1368,30 @@ input::-webkit-inner-spin-button {
 }
 option {
         background: #23353b;
+}
+.trade_info_bar {
+    height: 36px;
+    float: right;
+    margin-bottom: 10px;
+}
+.asset_item_header {
+    color: white;
+    border-bottom: 1px solid white;
+    background: rgba(0,0,0,0.2);
+    height: 28px;
+    padding: 5px 0 5px 0;
+}
+.crypto_pair {
+    float:left;
+    width:25%;
+    text-align:left;
+}
+.crypto_daily,
+.crypto_bid,
+.crypto_offer {
+    float:left;
+    width:25%;
+    text-align:right;
 }
 @media (max-width: 1473px) {
     .price_chart_panel {

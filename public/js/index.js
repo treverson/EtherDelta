@@ -283,20 +283,7 @@ $(document).ready(function(){
         $(".fills_panel").css('display','flex');
     });
     
-    $('.asset_item').click(function(){
-        $('.asset_section').css('display','none');
-        $('.orderform form').css('display', 'block');
-        $( ".c-nav" ).animate({width: 0}, 300);
-        
-        var str = $(this).find('.crypto_name').html();
-        var res = str.split("/");
-        front_asset = res[0];
-        back_asset = res[1];
-
-        set_asset();
-        init_asset_balance();
-    });
-    
+   
     $('.aggregation_dec').click(function(){
         if (aggregation_num > 0)    {
             aggregation_num--;
@@ -443,6 +430,7 @@ $(document).ready(function(){
     init_asset_balance();
     init_time();
 
+    put_volumedata();
 });
 
 $(window).resize(function(){
@@ -473,6 +461,35 @@ $(window).resize(function(){
         }
     }
 });
+
+function put_volumedata() {
+
+    for (var i=0;i<volume_array.length;i++){
+        var index = i + 2;
+        var str_html = '<div class="asset_item" onclick="click_asset(' + index + ')">';
+        str_html += '<div class="crypto_pair">' + volume_array[i][0] + '</div>';
+        str_html += '<div class="crypto_daily">' + volume_array[i][1] + '</div>';
+        str_html += '<div class="crypto_bid">' + volume_array[i][2] + '</div>';
+        str_html += '<div class="crypto_offer">' + volume_array[i][3] + '</div>';
+        str_html += '</div>';
+        $('.asset_section').append(str_html);
+    }
+}
+
+function click_asset(i) {
+
+        $('.asset_section').css('display','none');
+        $('.orderform form').css('display', 'block');
+        $( ".c-nav" ).animate({width: 0}, 300);
+        
+        var str = $('.asset_section .asset_item:nth-child(' + i + ') .crypto_pair').html();
+        var res = str.split("/");
+        front_asset = res[0];
+        back_asset = res[1];
+
+        set_asset();
+        init_asset_balance();
+}
 
 function init_time() {
     var items = new Array();
@@ -574,7 +591,7 @@ function initial_css(){
         bottom_panel_height = $('body').height() - 696;
         cnav_height = $('body').height() - 40;
         sidebar_height = $('body').height();
-        middle_panel_width = $('body').width() - 232;
+        middle_panel_width = $('body').width() - 320;
         trade_history_content_height = order_book_panel_height - 72;
         fills_content_height = bottom_panel_height - 72 - $('.banner').height();
         order_book_content_height = order_book_panel_height - 58;
@@ -679,7 +696,7 @@ function get_orderstate() {
 // Chart Part
 $(document).ready(function(){
   
-      var d = new Date(); console.log(d);
+      var d = new Date(); 
       var end = new Date(d.setTime(d.getTime() + (0*60*60*1000))); // now time
       var start = new Date(d.setTime(d.getTime() - (1*60*60*1000))); // before 1 hours
       var sel_type = 60; sel_graphType = 'candlestick';
