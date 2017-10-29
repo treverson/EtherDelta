@@ -12,7 +12,11 @@ $(document).ready(function () {
     //     getOpenOrders();
     //     getFills();
     // }, 3000);
+
+    getOrderData();
+    getTradeData();
     getOpenOrders();
+    getFills();
 });
 
 function getOrderData() {
@@ -49,13 +53,13 @@ function getOrderData() {
                 bid.size_zero = bid.size.toString().substr(bid.size.toString().length - zero_count(bid.size), zero_count(bid.size));
             }
             asks_bids_body_html += '<tr class="asks_tr" style="font-size:11px;line-height:16px;" ><td>\n\
-<div style="text-align:center;width:15%;float:left;"><span style="color:#d7d7d8;">' + ask.my_size + '</span></div>\n\
-<div style="text-align:right;width:15%;float:left;"><span style="color:#d7d7d8;">' + ask.size_main + '</span><span style="color:#5c5c5c">' + ask.size_zero + '</span></div>\n\
+<div style="text-align:center;width:15%;float:left;"><span style="color:white;">' + ask.my_size + '</span></div>\n\
+<div style="text-align:right;width:15%;float:left;"><span style="color:white;">' + ask.size_main + '</span><span style="color:#5c5c5c">' + ask.size_zero + '</span></div>\n\
 <div style="text-align:right;width:18%;float:left;"><span style="color:#fd2d2f;">' + ask.price + '</span></div>\n\
 <div style="width:4%;float:left;">&nbsp;</div>\n\
 <div style="text-align:left;width:18%;float:left;"><span style="color:#31ff31;">' + bid.price + '</span></div>\n\
-<div style="text-align:right;width:13%;float:left;padding-right:2%"><span style="color:#d7d7d8;">' + bid.size_main + '</span><span style="color:#5c5c5c">' + bid.size_zero + '</span></div>\n\
-<div style="text-align:center;width:15%;float:left;"><span style="color:#d7d7d8;">' + bid.my_size + '</span></div></td></tr>';
+<div style="text-align:right;width:13%;float:left;padding-right:2%"><span style="color:white;">' + bid.size_main + '</span><span style="color:#5c5c5c">' + bid.size_zero + '</span></div>\n\
+<div style="text-align:center;width:15%;float:left;"><span style="color:white;">' + bid.my_size + '</span></div></td></tr>';
         }
         
         asks_bids_tbl_str += asks_bids_body_html + "</tbody></table>";
@@ -90,15 +94,18 @@ function getTradeData() {
             else {
                 var arrow = '<i class="fa fa-angle-down" aria-hidden="true"></i>';
             }
+            trade.size = parseFloat(trade.size).toFixed(8);
+            trade.size_main = trade.size.toString().substr(0, trade.size.toString().length - zero_count(trade.size));
+            trade.size_zero = trade.size.toString().substr(trade.size.toString().length - zero_count(trade.size), zero_count(trade.size));
 
             if (trade.side == "sell"){
                 trade_body_html += '<tr class="trades_tr" style="font-size:11px;line-height:16px;" data-price="' + trade.trade_id + '"><td>\n\
-<div style="text-align:right;width:30%;float:left;top:0px;left:0px;"><span style="color:#d7d7d8;">' + parseFloat(trade.size).toFixed(8) + '</span></div>\n\
+<div style="text-align:right;width:30%;float:left;top:0px;left:0px;"><span style="color:white;">' + trade.size_main + '</span><span style="color:#5c5c5c">' + trade.size_zero + '</span></div>\n\
 <div style="text-align:center;width:40%;float:left;color:#fd2d2f;"><span>' + parseFloat(trade.price).toFixed(2) + '&nbsp;</span>' + arrow + '</div>\n\
-<div style="text-align:left;width:30%;float:left;"><span style="color:#d7d7d8;">' + trade.time + '</span></div></td></tr>';
+<div style="text-align:left;width:30%;float:left;"><span style="color:white;">' + trade.time + '</span></div></td></tr>';
             } else {
                 trade_body_html += '<tr class="trades_tr" style="font-size:11px;line-height:16px;" data-price="' + trade.trade_id + '"><td>\n\
-<div style="text-align:right;width:30%;float:left;top:0px;left:0px;"><span style="color:#d7d7d8;">' + parseFloat(trade.size).toFixed(8) + '</span></div>\n\
+<div style="text-align:right;width:30%;float:left;top:0px;left:0px;"><span style="color:#d7d7d8;">' + trade.size_main + '</span><span style="color:#5c5c5c">' + trade.size_zero + '</span></div>\n\
 <div style="text-align:center;width:40%;float:left;color:#31ff31;"><span>' + parseFloat(trade.price).toFixed(2) + '&nbsp;</span>' + arrow + '</div>\n\
 <div style="text-align:left;width:30%;float:left;"><span style="color:#d7d7d8;">' + trade.time + '</span></div></td></tr>';
             }
@@ -131,16 +138,20 @@ function getOpenOrders() {
             var num = parseFloat(order.filled) / parseFloat(order.size);
             if (num > 1)    num = 1;
             
+            order.size = parseFloat(order.size).toFixed(8);
+            order.size_main = order.size.toString().substr(0, order.size.toString().length - zero_count(order.size));
+            order.size_zero = order.size.toString().substr(order.size.toString().length - zero_count(order.size), zero_count(order.size));
+
             filled_str = '<div style="float:left;width:40px;height:10px;border:1px solid ' + color + ';margin-top: 5px;"><div style="float:left;height:8px;width:' + num*38 + 'px;background-color:' + color + ';"></div></div>';
 
             body_html += '<tr class="open_orders_tr" style="font-size:11px;line-height:20px;" data-price="' + order.order_id + '"><td>\n\
-<div style="text-align:center;width:10%;float:left;"><div style="color:#d7d7d8;border:1px solid #d7d7d8;border-radius:8px;height:16px;width: 16px;margin: auto;font-size:10px;"><div style="margin-top: -2px;">' + order.order_type.substr(0,1).toUpperCase() + '</div></div></div>\n\
-<div style="text-align:center;width:15%;float:left;"><span style="color:#d7d7d8;">' + parseFloat(order.size).toFixed(8) + '</span></div>\n\
-<div style="text-align:center;width:15%;float:left;color:#d7d7d8;">' + filled_str + '<div>' + order.filled + '</div></div>\n\
+<div style="text-align:center;width:10%;float:left;"><div style="color:white;border:1px solid #d7d7d8;border-radius:8px;height:16px;width: 16px;margin: auto;font-size:10px;"><div style="margin-top: -2px;">' + order.order_type.substr(0,1).toUpperCase() + '</div></div></div>\n\
+<div style="text-align:right;width:15%;float:left;padding-right: 4%;"><span style="color:white;">' + order.size_main + '</span><span style="color:#5c5c5c">' + order.size_zero + '</span></div>\n\
+<div style="text-align:center;width:15%;float:left;color:white;">' + filled_str + '<div>' + order.filled + '</div></div>\n\
 <div style="text-align:center;width:15%;float:left;"><span style="color:' + color + ';">' + parseFloat(order.price).toFixed(2) + '</span></div>\n\
-<div style="text-align:center;width:15%;float:left;"><span style="color:#d7d7d8;">0</span></div>\n\
-<div style="text-align:center;width:15%;float:left;"><span style="color:#d7d7d8;">' + order.time + '</span></div>\n\
-<div style="text-align:center;width:15%;float:left;"><span style="color:#d7d7d8;">' + order.status + '</span></div>\n\
+<div style="text-align:center;width:15%;float:left;"><span style="color:white;">0</span></div>\n\
+<div style="text-align:center;width:15%;float:left;"><span style="color:white;">' + order.time + '</span></div>\n\
+<div style="text-align:center;width:15%;float:left;"><span style="color:white;">' + order.status + '</span></div>\n\
 </td></tr>';
         }
         tbl_str += body_html + "</tbody></table>";
@@ -166,12 +177,16 @@ function getFills() {
                 var color = "#fd2d2f";
             else
                 var color =  "#31ff31";
+            fill.size = parseFloat(fill.size).toFixed(8);
+            fill.size_main = fill.size.toString().substr(0, fill.size.toString().length - zero_count(fill.size));
+            fill.size_zero = fill.size.toString().substr(fill.size.toString().length - zero_count(fill.size), zero_count(fill.size));
+
             body_html += '<tr class="open_orders_tr" style="font-size:11px;line-height:18px;"><td>\n\
-<div style="text-align:center;width:20%;float:left;"><span style="color:#d7d7d8;">' + parseFloat(fill.size).toFixed(8) + '</span></div>\n\
+<div style="text-align:right;width:20%;float:left;padding-right: 2%;"><span style="color:white;">' + fill.size_main + '</span><span style="color:#5c5c5c">' + fill.size_zero + '</span></div>\n\
 <div style="text-align:center;width:20%;float:left;"><span style="color:' + color + ';">' + parseFloat(fill.price).toFixed(2) + '</span></div>\n\
-<div style="text-align:center;width:20%;float:left;"><span style="color:#d7d7d8;">0</span></div>\n\
-<div style="text-align:center;width:20%;float:left;"><span style="color:#d7d7d8;">' + fill.time + '</span></div>\n\
-<div style="text-align:center;width:20%;float:left;"><span style="color:#d7d7d8;">' + fill.product + '</span></div>\n\
+<div style="text-align:center;width:20%;float:left;"><span style="color:white;">0</span></div>\n\
+<div style="text-align:center;width:20%;float:left;"><span style="color:white;">' + fill.time + '</span></div>\n\
+<div style="text-align:center;width:20%;float:left;"><span style="color:white;">' + fill.product + '</span></div>\n\
 </td></tr>';
         }
         tbl_str += body_html + "</tbody></table>";

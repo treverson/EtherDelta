@@ -399,7 +399,7 @@
                     </div>
                     <div class="fills_content">
                         <div class="table_head">
-                            <div class="size">Size(<span class='front_asset'></span>)</div>
+                            <div class="size" style="padding-left: 10%;">Size(<span class='front_asset'></span>)</div>
                             <div class="price">Price (<span class='back_asset'></span>)</div>
                             <div class="fee">Fee (<span class='back_asset'></span>)</div>
                             <div class="time">Time</div>

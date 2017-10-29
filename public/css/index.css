@@ -1376,7 +1376,7 @@ option {
 }
 .asset_item_header {
     color: white;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
     background: rgba(0,0,0,0.2);
     height: 28px;
     padding: 5px 0 5px 0;
@@ -1471,16 +1471,17 @@ option {
         margin-top: 0;
     }
     .c-nav {
-        height: calc(100% - 66px - 43px - 44px);
+        height: calc(100% - 66px - 43px - 46px);
     }
     .sel_bigchart {
         display: none;
     }
-    .asset_section {
-        padding: 10px 20px 0 20px;
-    }
+    
     #chartContain, #chartContain_2 {
         height: 48%;
+    }
+    .main_content {
+        padding: 20px 30px 20px 40px;
     }
 }
 @media (max-width: 500px) {
@@ -1488,7 +1489,7 @@ option {
         width: calc(100% - 20px);
     }
     .main_content {
-        padding: 77px 10px 66px 10px;
+        padding: 20px 10px 20px 10px;
     }
     
 }
