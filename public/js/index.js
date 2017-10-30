@@ -556,7 +556,6 @@ function initial_css(){
         price_chart_content_height = 768;
         price_chart_panel_height = order_book_panel_height;
         trade_history_content_height = order_book_panel_height - 72;
-        price_chart_panel_width = $('body').width();
         fills_content_height = $('body').height() - $('.open_orders_header').height() - $('.open_orders_panel .table_head').height() - 46 - $('.banner').height();
         bottom_panel_height = $('body').height() - 46;
 
@@ -568,7 +567,6 @@ function initial_css(){
             order_book_panel_height = 347;
             price_chart_panel_height = 694 + 23;
             price_chart_content_height = 668;
-            price_chart_panel_width = $('body').width() - 230 - 620 - 4 - 100;
 
             $('#chartContain').css('display','block');
             $('#chartContain_2').css('display','block');
@@ -576,7 +574,6 @@ function initial_css(){
             order_book_panel_height = 347;
             price_chart_panel_height = 347;
             price_chart_content_height = 280;
-            price_chart_panel_width = $('body').width() - 70;
 
             if (chart_selection == 'price') {
                 $('#chartContain').css('display','block');
