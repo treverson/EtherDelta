@@ -5,6 +5,10 @@ $(document).ready(function(){
     set_asset();  
     get_tradeprice();
 
+    $('.erc_toggle .btn.btn-primary.btn-xs.toggle-on').html('DECENTRALIZED TRADING');    
+    $('.erc_toggle .btn.btn-default.btn-xs.active.toggle-off').html('CENTRALIZED TRADING');    
+    $('.erc_toggle .toggle.btn.btn-xs.btn-default').css('width', '175px');
+
     $( ".header .product_selection h4" ).click(function(){
             $(".header .marketinfo .menu_entry").css('color','rgba(81,141,202,.8)');
         }
@@ -531,11 +535,9 @@ function doOnERC20Toggle() {
     if ($('#toggle_erc20').is(':checked')) {
         $('.content').css('display', 'none');
         $('.etherdelta').css('display', 'block');
-        $('.erc_txt').html("CENTRALIZED TRADING");
     } else {
         $('.content').css('display', 'block');
         $('.etherdelta').css('display', 'none');
-        $('.erc_txt').html("DECENTRALIZED TRADING");
     }
 }
 
@@ -635,10 +637,8 @@ function show_all(){
 function set_asset(){
     $('.front_asset').html(front_asset);
     $('.back_asset').html(back_asset);
-    var sel_type = $('#sel_type').val();
-    var sel_graphType = $('#sel_chart').val();		
-    var market_type = 'BTC-USD';
-    requestData(sel_type, sel_graphType, back_asset, market_type);
+    
+    showPriceChart();
 }
 
 function set_reverse_asset(){
@@ -689,38 +689,3 @@ function get_orderstate() {
         order_side = "sell";
     }
 }
-
-// Chart Part
-$(document).ready(function(){
-  
-      var d = new Date(); 
-      var end = new Date(d.setTime(d.getTime() + (0*60*60*1000))); // now time
-      var start = new Date(d.setTime(d.getTime() - (1*60*60*1000))); // before 1 hours
-      var sel_type = 60; sel_graphType = 'candlestick';
-      var market_type = "BTC-USD"; 
-      $('#sel_type').change(function(){	
-          sel_type = $('#sel_type').val();
-          requestData(sel_type, sel_graphType, back_asset, market_type);
-                  
-      });
-      $('#sel_chart').change(function(){	
-          sel_graphType = $('#sel_chart').val();		
-          requestData(sel_type, sel_graphType, back_asset, market_type);
-      });
-
-      setInterval(function(){ requestData(sel_type, sel_graphType, back_asset, market_type); }, 3000);
-      setInterval(function(){ draw_chart_order(back_asset, market_type); }, 3000);
-});
-
-addEventListener('DOMContentLoaded', function () {
-    pickmeup('.limit_order #calendar', {
-        position       : 'right',
-        hide_on_select : true,
-        format: 'Y-m-d'
-    });
-    pickmeup('.stoplimit_order #calendar', {
-        position       : 'right',
-        hide_on_select : true,
-        format: 'Y-m-d'
-    });
-});

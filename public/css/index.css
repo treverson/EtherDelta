@@ -31,7 +31,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-width: 320px;
-    background: url("../images/blur-bg.jpg") center center no-repeat;
+    background: url("../images/blur-bg.jpg") fixed;
 }
 ul {
     margin: 0;
@@ -159,9 +159,12 @@ input::-webkit-inner-spin-button {
     height: 66px;
     background: rgba(0,0,0,0.5);
 }
+.banner .row.section {
+    padding: 15px 20px;
+}
 .logo {
     float: left;
-    margin-top: 1px;
+    margin-top: 8px;
 }
 .logo img {
     width: 20px;
@@ -177,7 +180,7 @@ input::-webkit-inner-spin-button {
 .erc_toggle {
     float: left;
     margin-left: 20px;
-    
+    margin-top: 7px;    
 }
 #page {
     display: block;
@@ -390,6 +393,21 @@ input::-webkit-inner-spin-button {
 
 /* trade_info_bar */
 
+.spread_info_bar {
+    float: right;
+    margin-right: 20px;
+}
+.bid,
+.spread,
+.ask {
+    float:left;
+    margin-right:20px;
+}
+.trade_info_bar {
+    height: 36px;
+    float: right;
+    margin-right: 20px;
+}
 .market_stat, 
 .day_volume {
     position: relative;
@@ -402,7 +420,13 @@ input::-webkit-inner-spin-button {
 .market_stat .num,
 .market_stat .back_asset,
 .day_volume .num,
-.day_volume .front_asset {
+.day_volume .front_asset,
+.bid .num,
+.bid .back_asset,
+.spread .num,
+.spread .back_asset,
+.ask .num,
+.ask .back_asset {
     display: inline-block;
     font-size: 15px;
     font-family: "opensans_bold";
@@ -412,7 +436,10 @@ input::-webkit-inner-spin-button {
 }
 .market_stat .descr,
 .price_up .descr,
-.day_volume .descr {
+.day_volume .descr,
+.bid .descr,
+.spread .descr,
+.ask .descr {
     display: block;
     font-size: 11px;
     font-weight: normal;
@@ -588,20 +615,24 @@ input::-webkit-inner-spin-button {
     font-size:12px;
 }
 #deposit_btn {
-    float:left;
-    padding: 8px 20px;
+    float: left;
+    padding: 8px 0;
+    text-align: center;
     color: hsla(0,0%,100%,.5);
     border: 1px solid hsla(0,0%,100%,.5);
     border-radius: 5px;
     cursor: pointer;
+    width: 130px;
 }
 #withdraw_btn {
-    float:right;
-    padding: 8px 20px;
+    float: right;
+    padding: 8px 0px;
     color: hsla(0,0%,100%,.5);
     border: 1px solid hsla(0,0%,100%,.5);
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    width: 130px;
 }
 #deposit_btn:hover,
 #withdraw_btn:hover {
@@ -997,6 +1028,7 @@ input::-webkit-inner-spin-button {
 .order_book_panel .buy_market_size {
     width: 15%;
     text-align:left;
+    padding-left: 3%;
 }
 .order_book_panel .sell_price,
 .order_book_panel .buy_price {
@@ -1353,7 +1385,7 @@ input::-webkit-inner-spin-button {
 .main_content {
     height: calc(100% - 66px);
     overflow: scroll;
-    padding: 30px 20px 30px 20px;
+    padding: 40px 20px 20px 20px;
 }
 .bottom_panel {
     margin-top: 20px;
@@ -1361,15 +1393,12 @@ input::-webkit-inner-spin-button {
 .panel {
     border-radius: 5px;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,.25);
-    background: rgba(255,255,255,0.1);
+    background: url(../images/blur-bg-blurred.jpg) fixed;
+    -webkit-transition: none;
+    transition: none;
 }
 option {
         background: #23353b;
-}
-.trade_info_bar {
-    height: 36px;
-    float: right;
-    margin-bottom: 10px;
 }
 .asset_item_header {
     color: white;
@@ -1434,6 +1463,11 @@ option {
     }
     #chartContain, #chartContain_2 {
         height: 100%;
+    }
+}
+@media (max-width: 1000px) {
+    .spread_info_bar {
+        display: none;
     }
 }
 @media (max-width: 749px) {

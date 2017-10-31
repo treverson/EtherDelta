@@ -14,8 +14,8 @@
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
     <script src="{{ asset('./assets/js/dataloader.js') }}"></script>
 
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <link href="{{ asset('./assets/css/bootstrap-toggle.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('./assets/js/bootstrap-toggle.min.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('./css/pickmeup.css') }}">
     <link rel="stylesheet" media="screen" href="{{ asset('./css/calendar.css') }}">
@@ -30,9 +30,8 @@
     <script src="{{ asset('./js/index.js') }}"></script>
     <script src="{{ asset('./js/ajax.js') }}"></script>
     <div class="banner">
-        <div class="row section" style="padding: 20px 20px;">
+        <div class="row section">
             <div class="logo"><img src="{{ asset('images/centra logo.png') }}"/></div>
-            <div class="erc_txt">CENTRALIZED TRADING</div>
             <div class="erc_toggle">
                 <input type="checkbox" data-toggle="toggle" data-size="mini" id="toggle_erc20" onchange='doOnERC20Toggle()'>
             </div>
@@ -47,6 +46,35 @@
                     </form>          
             </div>
         @endif
+            <div class="spread_info_bar">    
+                <div class="bid">
+                    <span class="num">5780&nbsp;</span><span class="back_asset"></span>
+                    <span class="descr">Bid</span>
+                </div>
+                <div class="spread">
+                    <span class="num">1&nbsp;</span><span class="back_asset"></span>
+                    <span class="descr">Spread</span>
+                </div>
+                <div class="ask">
+                    <span class="num">5781&nbsp;</span><span class="back_asset"></span>
+                    <span class="descr">Ask</span>
+                </div>
+            </div>
+            <div class="trade_info_bar">
+                <div class="market_stat">
+                    <span class="num">0.00000000&nbsp;</span><span class="back_asset"></span>
+                    <span class="descr">Last trade price</span>
+                </div>
+                <div class="price_up">
+                    <span class="sign">+</span>
+                    <span class="num">9.46 %</span>
+                    <span class="descr">24 hour price</span>
+                </div>
+                <div class="day_volume">
+                    <span class="num">55991&nbsp;</span><span class="front_asset"></span>
+                    <span class="descr">24 hour volume</span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="content">
@@ -245,21 +273,6 @@
             </div>
         </div>
         <div class="main_content">
-            <div class="trade_info_bar">
-                <div class="market_stat">
-                    <span class="num">0.00000000</span><span class="back_asset"></span>
-                    <span class="descr">Last trade price</span>
-                </div>
-                <div class="price_up">
-                    <span class="sign">+</span>
-                    <span class="num">9.46 %</span>
-                    <span class="descr">24 hour price</span>
-                </div>
-                <div class="day_volume">
-                    <span class="num">55991&nbsp;</span><span class="front_asset"></span>
-                    <span class="descr">24 hour volume</span>
-                </div>
-            </div>
             <div class="row middle_panel">
                 <div class="col-md-12">
                     <div class="row price_chart_panel panel">
@@ -323,16 +336,6 @@
                                 <div class="wrapper">
                                     <div id="order_book_loading" class="loader">Loading...</div>
                                     <div id="div_asks_bids"></div>
-                                </div>
-                            </div>
-                            <div class="aggregation">
-                                <div class="column">
-                                    <div class="text">Aggregation</div>
-                                    <div class="value">1.00</div>
-                                </div>
-                                <div class="buttons">
-                                    <div class="aggregation_dec"></div>
-                                    <div class="aggregation_inc"></div>
                                 </div>
                             </div>
                         </div>
