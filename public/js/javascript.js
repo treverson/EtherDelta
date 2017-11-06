@@ -6,6 +6,7 @@ var chart = AmCharts.makeChart("chartdiv", {
     'id': 'a1',
     "position": "right",
     'axisColor': 'white',
+    'axisAlpha': 1,
     'color': 'white',
     'unit': '',
     'unitPosition': 'left',
@@ -19,7 +20,7 @@ var chart = AmCharts.makeChart("chartdiv", {
     "minMaxMultiplier": 2,
   }],
   "allLabels": [{
-    "text": "(ETH)",
+    "text": "",
     "rotation": 0,
     "x": "!55",
     "y": "0",
@@ -47,9 +48,7 @@ var chart = AmCharts.makeChart("chartdiv", {
     "type": 'candlestick',
     "valueAxis": "a1",
     "valueField": "close",
-  },
-
-  {
+  }, {
     "id": "g2",
     'title': 'volume',
     'balloonText': '',
@@ -70,8 +69,9 @@ var chart = AmCharts.makeChart("chartdiv", {
   },
   "categoryField": "date",
   "categoryAxis": {
-    'axisColor': 'white',
+    'axisColor': 'rgba(255,255,255,1)',
     'color': 'white',
+    'axisAlpha': 1,
     "minPeriod": "mm",
     "parseDates": true,
 
@@ -144,103 +144,67 @@ function requestData(sel_type, graphType, axis_label, market_type, point) {
     chart.graphs[0].fillColors = "#46ffd6";
     chart.graphs[0].lineColor = '#46ffd6';
   }
-  chart.allLabels[0].text = axis_label;
 
   dataProvider.reverse();
 
   chart.graphs[0].type = graphType;
-  chart.dataProvider = dataProvider;
+  chart.dataProvider = dataProvider;    
+  if( dataProvider.length != 0){
+    chart.allLabels[0].text = axis_label;
+  }
+  else{
+    chart.allLabels[0].text = '';
+  }
   chart.validateData();
+  
   $('#curtain').css('display', 'none');
 }
 
-function processData(list, type, desc) {
+function showDepthChart(axis_label, market_type, datas) {
 
-  var res = [];
-  // Convert to data points
-  for (var i = 0; i < list.length; i++) {
-    list[i] = {
-      value: Number(list[i][0]),
-      volume: Number(list[i][1]),
-    }
-  }
-
-  // Sort list just in case
-  list.sort(function (a, b) {
-    if (a.value > b.value) {
-      return 1;
-    }
-    else if (a.value < b.value) {
-      return -1;
-    }
-    else {
-      return 0;
-    }
-  });
-
-  // Calculate cummulative volume
-  if (desc) {
-    for (var i = list.length - 1; i >= 0; i--) {
-      if (i < (list.length - 1)) {
-        list[i].totalvolume = list[i + 1].totalvolume + list[i].volume;
-      }
-      else {
-        list[i].totalvolume = list[i].volume;
-      }
-      var dp = {};
-      dp["value"] = list[i].value;
-      dp[type + "volume"] = list[i].volume;
-      dp[type + "totalvolume"] = list[i].totalvolume;
-      res.unshift(dp);
-    }
+  var data_length, res = [];
+  if (datas.bids.length > datas.asks.length) {
+    data_length = datas.asks.length;
   }
   else {
-    for (var i = 0; i < list.length; i++) {
-      if (i > 0) {
-        list[i].totalvolume = list[i - 1].totalvolume + list[i].volume;
-      }
-      else {
-        list[i].totalvolume = list[i].volume;
-      }
-      var dp = {};
-      dp["value"] = list[i].value;
-      dp[type + "volume"] = list[i].volume;
-      dp[type + "totalvolume"] = list[i].totalvolume;
-      res.push(dp);
-    }
+    data_length = datas.bids.length;
   }
 
-  return res;
-}
+  var bids_list = new Array(data_length);
+  for (var i = 0; i < data_length; i++) {
 
-function showDepthChart(axis_label, market_type, datas) {
-  
-  var bids_list = new Array(60);
-  for (var i = 0; i < 60; i++) {
-    bids_list[i] = new Array(3);
-    bids_list[i][0] = (typeof datas.bids[i] != 'undefined') ? datas.bids[i].price : 0;
-    bids_list[i][1] = (typeof datas.bids[i] != 'undefined') ? datas.bids[i].size : 0;
-    bids_list[i][2] = (typeof datas.bids[i] != 'undefined') ? datas.bids[i].num_orders : 0;
+    var item = {
+      bid_size: datas.bids[i].size,
+      price: datas.bids[i].price,
+      num_orders: datas.bids[i].num_orders
+    };
+    bids_list[i] = item;
   }
-  var asks_list = new Array(60);
-  for (var i = 0; i < 60; i++) {
-    asks_list[i] = new Array(3);
-    asks_list[i][0] = (typeof datas.asks[i] != 'undefined') ? datas.asks[i].price : 0;
-    asks_list[i][1] = (typeof datas.asks[i] != 'undefined') ? datas.asks[i].size : 0;
-    asks_list[i][2] = (typeof datas.asks[i] != 'undefined') ? datas.asks[i].num_orders : 0;
+
+  var asks_list = new Array(data_length);
+  for (var i = 0; i < data_length; i++) {
+
+    var item = {
+      ask_size: datas.asks[i].size,
+      price: datas.asks[i].price,
+      num_orders: datas.asks[i].num_orders
+    };
+    asks_list[i] = (item);
   }
+
   var data = {
-    bids: bids_list,
+    bids: bids_list.reverse(),
     asks: asks_list
   };
 
-  bids_data = processData(data.bids, "bids", true);
-  asks_data = processData(data.asks, "asks", false);
-
-  bids_data.push.apply(bids_data, asks_data);
-console.log('bids_data', bids_data);
-  res = bids_data;
-  chart_2.dataProvider = res;
+  res.push.apply(data.bids, data.asks); 
+  if( data.bids.length != 0){
+    chart_2.allLabels[0].text = axis_label;
+  }
+  else{
+    chart_2.allLabels[0].text = '';
+  }
+  chart_2.dataProvider = data.bids;
   chart_2.allLabels[0].text = axis_label;
   chart_2.validateData();
   $('#curtain_2').css('display', 'none');
@@ -249,6 +213,7 @@ console.log('bids_data', bids_data);
 var chart_2 = AmCharts.makeChart("chartdiv_2", {
   "type": "serial",
   "theme": "light",
+
   "chartCursor": {
     "cursorColor": '#ffffff',
     "color": '#000000',
@@ -268,46 +233,31 @@ var chart_2 = AmCharts.makeChart("chartdiv_2", {
   }],
   "graphs": [{
     "id": "bids",
+    "balloonText": "<table style = 'font-size: 12px;' ><tr><td>bids</td><td>[[bid_size]]</td></tr><tr><td>price</td><td>[[price]]</td></tr></table> ",
     "fillAlphas": 0.1,
     "lineAlpha": 1,
     "lineThickness": 2,
-    "lineColor": "#31ff31",
+    "lineColor": "#46ffd6",
     "type": "step",
-    "valueField": "bidstotalvolume",
-    "balloonFunction": balloon
+    "valueField": "bid_size",
   }, {
     "id": "asks",
+    "balloonText": "<table style = 'font-size: 12px;' ><tr><td>asks</td><td>[[ask_size]]</td></tr><tr><td>price</td><td>[[price]]</td></tr></table>",
     "fillAlphas": 0.1,
     "lineAlpha": 1,
     "lineThickness": 2,
-    "lineColor": "#fd2d2f",
+    "lineColor": "#fe59ba",
     "type": "step",
-    "valueField": "askstotalvolume",
-    "balloonFunction": balloon
-  }, /*{
-    "lineAlpha": 0,
-    "fillAlphas": 0.2,
-    "lineColor": "#000",
-    "type": "column",
-    "clustered": false,
-    "valueField": "bidsvolume",
-    "showBalloon": false
-  }, {
-    "lineAlpha": 0,
-    "fillAlphas": 0.2,
-    "lineColor": "#000",
-    "type": "column",
-    "clustered": false,
-    "valueField": "asksvolume",
-    "showBalloon": false
-  }*/],
-  "categoryField": "value",
+    "valueField": "ask_size",
+  },],
+  "categoryField": "price",
   "balloon": {
     "textAlign": "left"
   },
   "valueAxes": [{
     'position': 'left',
     'axisColor': 'white',
+    'axisAlpha': 1,
     'color': 'white'
   }],
   "categoryAxis": {
@@ -316,47 +266,10 @@ var chart_2 = AmCharts.makeChart("chartdiv_2", {
     "showFirstLabel": false,
     "showLastLabel": false,
     'axisColor': 'white',
-    'color': 'white',
-    'labelFunction': formatLabel
+    'axisAlpha': 1,
+    'color': 'white'
   },
 });
-
-function balloon(item, graph) {
-  var txt;
-  if (graph.id == "asks") {
-    txt = "Ask: <strong>" + formatNumber(item.dataContext.value, graph.chart, 4) + "</strong><br />"
-      + "Total volume: <strong>" + formatNumber(item.dataContext.askstotalvolume, graph.chart, 4) + "</strong><br />"
-      + "Volume: <strong>" + formatNumber(item.dataContext.asksvolume, graph.chart, 4) + "</strong>";
-  }
-  else {
-    txt = "Bid: <strong>" + formatNumber(item.dataContext.value, graph.chart, 4) + "</strong><br />"
-      + "Total volume: <strong>" + formatNumber(item.dataContext.bidstotalvolume, graph.chart, 4) + "</strong><br />"
-      + "Volume: <strong>" + formatNumber(item.dataContext.bidsvolume, graph.chart, 4) + "</strong>";
-  }
-  return txt;
-}
-
-function formatNumber(val, chart, precision) {
-  return AmCharts.formatNumber(
-    val,
-    {
-      precision: precision ? precision : chart.precision,
-      decimalSeparator: chart.decimalSeparator,
-      thousandsSeparator: chart.thousandsSeparator
-    }
-  );
-}
-
-function formatLabel(value, valueString, axis) {
-  // let's say we dont' want minus sign next to negative numbers
-  if (value > 0) {
-    valueString = value;
-  }
-  else {
-    valueString = '';
-  }
-  return valueString;
-}
 
 function change_style(sel) {
   if (sel == 'price') {

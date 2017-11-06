@@ -15,18 +15,15 @@ addEventListener('DOMContentLoaded', function () {
 });
 
 $(document).ready(function () {
-    // var intervalId = window.setInterval(function () {
-    //     interval_num_order_book++;
-    //     interval_num_trade++;
-    //     interval_num_open_orders++;
-    //     interval_num_fills++;
-    //     showData();
-    //     getChart();
-    // }, 3000);
+    var intervalId = window.setInterval(function () {
+        interval_num_order_book++;
+        interval_num_trade++;
+        interval_num_open_orders++;
+        interval_num_fills++;
+        showData();
+        showPriceChart();
+    }, 3000);
     
-    showData();
-    showPriceChart();
-
     $('#sel_hour').change(function(){	
         showPriceChart();
     });
